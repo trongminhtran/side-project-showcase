@@ -24,3 +24,7 @@ Allow a user to create a side project for showcasing.
 ## Failure Cases
 - Validation error → 400
 - Unauthorized → 401
+
+## Forbidden
+- Creating update/edit/mutate methods
+- Anticipating future features

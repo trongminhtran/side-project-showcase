@@ -2,7 +2,7 @@
 
 ## Aggregate: Project
 ### Properties
-- ProjectId
+- Id
 - OwnerId
 - Title
 - Description
@@ -21,7 +21,7 @@
 
 ## Aggregate: Reaction
 ### Properties
-- ReactionId
+- Id
 - ProjectId
 - UserId
 - Type (Like, Love)
@@ -35,7 +35,7 @@
 
 ## Aggregate: Rating
 ### Properties
-- RatingId
+- Id
 - ProjectId
 - UserId
 - Score (1–5)
@@ -49,7 +49,7 @@
 
 ## Aggregate: Comment
 ### Properties
-- CommentId
+- Id
 - ProjectId
 - UserId
 - Content
