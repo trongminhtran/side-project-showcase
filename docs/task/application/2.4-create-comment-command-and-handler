@@ -1,0 +1,58 @@
+## Task Name
+Implement CommentProjectCommand
+
+## Layer
+Application
+
+## Related Specs
+- comment-spec.md
+- domain-rules.md
+
+## Files to Create
+- Comments/Commands/CommentProjectCommand.cs
+- Comments/Commands/CommentProjectCommandHandler.cs
+- Comments/ICommentRepository.cs
+
+## Design Constraints
+- Application enforces:
+  - Project existence
+  - Project visibility (must be Public)
+  - Parent comment existence
+  - One-level thread rule
+- Domain Comment is immutable
+
+## Required Behavior
+### CommentProjectCommand
+- Properties:
+  - ProjectId (Guid)
+  - UserId (Guid)
+  - Content (string)
+  - ParentCommentId (Guid?)
+
+### Handler Responsibilities
+1. Load project by ProjectId
+2. Reject if project not found
+3. Reject if project is Private
+4. If ParentCommentId provided:
+   - Load parent comment
+   - Reject if not found
+   - Reject if parent.ParentCommentId != null
+5. Create Comment aggregate
+6. Persist comment
+7. Return CommentId
+
+## Repository Contracts
+### IProjectRepository
+- GetById(Guid projectId)
+
+### ICommentRepository
+- GetById(Guid commentId)
+- Add(Comment comment)
+
+## Forbidden
+- Thread logic inside Domain
+- Recursive or tree traversal
+- EF Core references
+
+## Output
+Clean CQRS-style Application code
