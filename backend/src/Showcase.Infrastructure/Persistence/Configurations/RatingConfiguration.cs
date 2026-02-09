@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Showcase.Domain.Projects;
 using Showcase.Domain.Ratings;
 
 namespace Showcase.Infrastructure.Persistence.Configurations;
@@ -23,6 +24,10 @@ public sealed class RatingConfiguration : IEntityTypeConfiguration<Rating>
 
         builder.Property(rating => rating.CreatedAt)
             .IsRequired();
+
+        builder.HasOne<Project>()
+            .WithMany()
+            .HasForeignKey(rating => rating.ProjectId);
 
         builder.HasIndex(rating => new { rating.ProjectId, rating.UserId })
             .IsUnique();
