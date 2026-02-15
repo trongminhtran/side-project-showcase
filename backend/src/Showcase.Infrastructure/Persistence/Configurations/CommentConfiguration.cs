@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Showcase.Domain.Comments;
+using Showcase.Domain.Projects;
 
 namespace Showcase.Infrastructure.Persistence.Configurations;
 
@@ -26,6 +27,14 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
 
         builder.Property(comment => comment.ParentCommentId)
             .IsRequired(false);
+
+        builder.HasOne<Project>()
+            .WithMany()
+            .HasForeignKey(comment => comment.ProjectId);
+
+        builder.HasOne<Comment>()
+            .WithMany()
+            .HasForeignKey(comment => comment.ParentCommentId);
 
         builder.HasIndex(comment => comment.ProjectId);
         builder.HasIndex(comment => comment.ParentCommentId);
